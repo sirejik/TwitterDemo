@@ -9,28 +9,49 @@
         </form>
     </div>
 </div>
-<div>
-    <form method="post" enctype="multipart/form-data">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="text" name="text" placeholder="Input new message" />
-        <input type="text" name="tag" placeholder="Tag" />
-        <input type="file" name="file" placeholder="File" />
-        <button type="submit">Send</button>
-    </form>
-</div>
-<#list messages as message>
-<div>
-    <b>${message.id}</b>
-    <span>${message.text}</span>
-    <i>${message.tag}</i>
-    <strong>${message.authorName}</strong>
-    <div>
-        <#if message.filename??>
-            <img src="/img/${message.filename}">
-        </#if>
+
+<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Add new message
+</a>
+<div class="collapse" id="collapseExample">
+    <div class="form-group mt-3">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="text" class="form-control" name="text" placeholder="Input new message" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="tag" placeholder="Tag" />
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" name="file" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+            <input type="hidden" value="${_csrf.token}" name="_csrf">
+        </form>
     </div>
 </div>
-<#else>
-    No messages
-</#list>
+
+<div class="card-columns">
+    <#list messages as message>
+    <div class="card my-3">
+        <#if message.filename??>
+            <img src="/img/${message.filename}" class="card-img-top">
+        </#if>
+        <div class="m-2">
+            <span>${message.text}</span>
+            <i>${message.tag}</i>
+        </div>
+        <div class="card-footer text-muted">
+            ${message.authorName}
+        </div>
+    </div>
+    <#else>
+        No messages
+    </#list>
+</div>
 </@c.page>
