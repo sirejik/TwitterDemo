@@ -1,9 +1,13 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/login.ftl" as l>
+
 <@c.page>
-<div>
-    <@l.logout />
-    <span><a href="/user">User list</a></span>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <form method="get" action="/main" class="form-inline">
+            <input type="text" name="filter" class="form-control" value="${filter?ifExists}" placeholder="Search by tag">
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+        </form>
+    </div>
 </div>
 <div>
     <form method="post" enctype="multipart/form-data">
@@ -14,11 +18,6 @@
         <button type="submit">Send</button>
     </form>
 </div>
-<div>Message list:</div>
-<form method="get" action="/main">
-    <input type="text" name="filter" value="${filter?ifExists}">
-    <button type="submit">Search messages by tag</button>
-</form>
 <#list messages as message>
 <div>
     <b>${message.id}</b>
