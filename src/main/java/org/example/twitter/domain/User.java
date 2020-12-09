@@ -1,9 +1,12 @@
 package org.example.twitter.domain;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
 
@@ -14,12 +17,29 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message =  "Username cannot be empty")
+    @Length(max = 2048, message = "Message too long (more than 2kB)")
     private String username;
 
+    @NotBlank(message =  "Password cannot be empty")
     private String password;
+
+    @Transient
+    @NotBlank(message =  "Password confirmation cannot be empty")
+    private String passwordConfirmation;
 
     private boolean active;
 
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
+    }
+
+    @Email(message = "Email is not correct")
+    @NotBlank(message =  "Email cannot be empty")
     private String email;
 
     private String activationCode;
