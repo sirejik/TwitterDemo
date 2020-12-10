@@ -13,7 +13,7 @@
 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
     Add new message
 </a>
-<div class="collapse" id="collapseExample">
+<div class="collapse <#if message??>show</#if>" id="collapseExample">
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -26,7 +26,13 @@
                 </#if>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="tag" placeholder="Tag" />
+                <input type="text" class="form-control" value="<#if message??>${message.tag}</#if>"
+                       name="tag" placeholder="Tag" />
+                <#if tagError??>
+                    <div class="invalid-feedback">
+                        ${tagError}
+                    </div>
+                </#if>
             </div>
             <div class="form-group">
                 <div class="custom-file">
