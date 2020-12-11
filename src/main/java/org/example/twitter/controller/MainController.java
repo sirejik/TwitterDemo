@@ -81,9 +81,11 @@ public class MainController {
 
                 message.setFilename(resultFilename);
             }
-        }
 
-        messageRepo.save(message);
+            model.addAttribute("message", null);
+
+            messageRepo.save(message);
+        }
 
         Iterable<Message> messages = messageRepo.findAll();
 
