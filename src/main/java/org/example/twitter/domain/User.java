@@ -24,19 +24,7 @@ public class User implements UserDetails {
     @NotBlank(message =  "Password cannot be empty")
     private String password;
 
-    @Transient
-    @NotBlank(message =  "Password confirmation cannot be empty")
-    private String passwordConfirmation;
-
     private boolean active;
-
-    public String getPasswordConfirmation() {
-        return passwordConfirmation;
-    }
-
-    public void setPasswordConfirmation(String passwordConfirmation) {
-        this.passwordConfirmation = passwordConfirmation;
-    }
 
     @Email(message = "Email is not correct")
     @NotBlank(message =  "Email cannot be empty")
