@@ -1,5 +1,5 @@
 # twitter-demo
-TODO: add text
+My Twitter version
 
 ## How to up a docker container with Postgres.
 To build and start a container with Postgres need to execute the following command:
