@@ -15,7 +15,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Password:</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control ${(passwordError??)?string('is-invalid', '')}"
+                <input type="password" class="form-control ${(passwordError??)?string('is-invalid', '')}"
                        name="password" placeholder="Password" />
                 <#if passwordError??>
                     <div class="invalid-feedback">
@@ -28,7 +28,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Password:</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control ${(passwordConfirmationError??)?string('is-invalid', '')}"
+                    <input type="password" class="form-control ${(passwordConfirmationError??)?string('is-invalid', '')}"
                           name="passwordConfirmation" placeholder="Retype password" />
                     <#if passwordConfirmationError??>
                         <div class="invalid-feedback">
@@ -59,7 +59,7 @@
                 </#if>
             </div>
         </#if>
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <#if !isRegisterForm>
             <a href="/registration">Add new user</a>
         </#if>
@@ -69,7 +69,7 @@
 
 <#macro logout>
     <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <button class="btn btn-primary" type="submit"><#if user??>Sign Out<#else>Log In</#if></button>
     </form>
 </#macro>

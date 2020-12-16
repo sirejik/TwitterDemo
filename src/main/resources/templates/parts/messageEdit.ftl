@@ -25,15 +25,15 @@
             </div>
             <div class="form-group">
                 <div class="custom-file">
-                    <input type="file" name="file" id="customFile">
+                    <input type="file" name="file" id="customFile" />
                     <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Save message</button>
             </div>
-            <input type="hidden" value="${_csrf.token}" name="_csrf">
-            <input type="hidden" value="<#if message??>${message.id}</#if>" name="id">
+            <input type="hidden" value="${_csrf.token}" name="_csrf" />
+            <input type="hidden" value="<#if message??>${message.id}</#if>" name="id" />
         </form>
     </div>
 </div>
