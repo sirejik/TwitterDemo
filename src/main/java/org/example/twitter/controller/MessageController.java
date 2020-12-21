@@ -3,6 +3,7 @@ package org.example.twitter.controller;
 import org.example.twitter.domain.Message;
 import org.example.twitter.domain.User;
 import org.example.twitter.repos.MessageRepo;
+import org.example.twitter.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -30,9 +31,12 @@ import java.util.UUID;
 import static org.example.twitter.controller.ControllerUtils.getErrors;
 
 @Controller
-public class MainController {
+public class MessageController {
     @Autowired
     private MessageRepo messageRepo;
+
+    @Autowired
+    private MessageService messageService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -46,15 +50,10 @@ public class MainController {
     public String main(
         @RequestParam(required = false, defaultValue = "") String filter,
         Model model,
-        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+        @AuthenticationPrincipal User user
     ) {
-        Page<Message> page;
-
-        if (filter != null && !filter.isEmpty()) {
-            page = messageRepo.findByTag(filter, pageable);
-        } else {
-            page = messageRepo.findAll(pageable);
-        }
+        Page<Message> page = messageService.messageList(pageable, filter);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
@@ -87,7 +86,7 @@ public class MainController {
             messageRepo.save(message);
         }
 
-        Page<Message> page = messageRepo.findAll(pageable);
+        Page<Message> page = messageService.messageList(pageable, null);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
@@ -95,22 +94,24 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/user-messages/{user}")
+    @GetMapping("/user-messages/{author}")
     public String userMessages(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user,
+            @PathVariable User author,
             Model model,
-            @RequestParam(required = false) Message message
+            @RequestParam(required = false) Message message,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Set<Message> messages = user.getMessages();
+        Page<Message> page = messageService.messageListForUser(pageable, author);
 
-        model.addAttribute("userChannel", user);
-        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
-        model.addAttribute("subscribersCount", user.getSubscribers().size());
-        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
-        model.addAttribute("messages", messages);
+        model.addAttribute("userChannel", author);
+        model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
+        model.addAttribute("subscribersCount", author.getSubscribers().size());
+        model.addAttribute("isSubscriber", author.getSubscribers().contains(currentUser));
+        model.addAttribute("page", page);
         model.addAttribute("message", message);
-        model.addAttribute("isCurrentUser", currentUser.equals(user));
+        model.addAttribute("isCurrentUser", currentUser.equals(author));
+        model.addAttribute("url", "/user-messages/" + author.getId());
 
         return "userMessages";
     }
