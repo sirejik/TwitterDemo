@@ -2,6 +2,7 @@ package org.example.twitter.controller;
 
 import org.example.twitter.domain.Message;
 import org.example.twitter.domain.User;
+import org.example.twitter.domain.dto.MessageDto;
 import org.example.twitter.repos.MessageRepo;
 import org.example.twitter.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import static org.example.twitter.controller.ControllerUtils.getErrors;
@@ -53,7 +53,7 @@ public class MessageController {
         @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
         @AuthenticationPrincipal User user
     ) {
-        Page<Message> page = messageService.messageList(pageable, filter);
+        Page<MessageDto> page = messageService.messageList(pageable, filter, user);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
@@ -86,7 +86,7 @@ public class MessageController {
             messageRepo.save(message);
         }
 
-        Page<Message> page = messageService.messageList(pageable, null);
+        Page<MessageDto> page = messageService.messageList(pageable, null, user);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
@@ -102,7 +102,7 @@ public class MessageController {
             @RequestParam(required = false) Message message,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Page<Message> page = messageService.messageListForUser(pageable, author);
+        Page<MessageDto> page = messageService.messageListForUser(pageable, author, currentUser);
 
         model.addAttribute("userChannel", author);
         model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
