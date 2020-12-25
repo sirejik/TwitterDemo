@@ -49,10 +49,10 @@ public class MessageController {
 
     @GetMapping("/main")
     public String main(
-        @RequestParam(required = false, defaultValue = "") String filter,
-        Model model,
-        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
-        @AuthenticationPrincipal User user
+            @RequestParam(required = false, defaultValue = "") String filter,
+            Model model,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+            @AuthenticationPrincipal User user
     ) {
         Page<MessageDto> page = messageService.messageList(pageable, filter, user);
 
@@ -65,12 +65,12 @@ public class MessageController {
 
     @PostMapping("/main")
     public String add(
-        @AuthenticationPrincipal User user,
-        @Valid Message message,
-        BindingResult bindingResult,
-        Model model,
-        @RequestParam("file") MultipartFile file,
-        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+            @AuthenticationPrincipal User user,
+            @Valid Message message,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("file") MultipartFile file,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) throws IOException {
         message.setAuthor(user);
 
@@ -144,11 +144,11 @@ public class MessageController {
     }
 
     @GetMapping("/messages/{message}/like")
-    public String like (
-        @AuthenticationPrincipal User currentUser,
-        @PathVariable Message message,
-        RedirectAttributes redirectAttributes,
-        @RequestHeader(required = false) String referer
+    public String like(
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable Message message,
+            RedirectAttributes redirectAttributes,
+            @RequestHeader(required = false) String referer
     ) {
         Set<User> likes = message.getLikes();
         if (likes.contains(currentUser)) {
@@ -177,7 +177,7 @@ public class MessageController {
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
 
-            file.transferTo(new File(uploadPath +"/" + resultFilename));
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
 
             message.setFilename(resultFilename);
         }

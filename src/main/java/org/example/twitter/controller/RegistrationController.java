@@ -1,12 +1,10 @@
 package org.example.twitter.controller;
 
-import org.apache.catalina.connector.Response;
 import org.example.twitter.domain.User;
 import org.example.twitter.domain.dto.CaptchaResponseDto;
 import org.example.twitter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 

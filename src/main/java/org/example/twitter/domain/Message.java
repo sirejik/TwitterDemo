@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 public class Message {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank(message = "Please fill the message")
@@ -28,8 +28,8 @@ public class Message {
     @ManyToMany
     @JoinTable(
             name = "message_likes",
-            joinColumns = { @JoinColumn(name = "message_id") },
-            inverseJoinColumns =  { @JoinColumn(name = "user_id") }
+            joinColumns = {@JoinColumn(name = "message_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
     private Set<User> likes = new HashSet<>();
 

@@ -1,6 +1,5 @@
 package org.example.twitter.service;
 
-import org.assertj.core.internal.bytebuddy.asm.Advice;
 import org.example.twitter.domain.Role;
 import org.example.twitter.domain.User;
 import org.example.twitter.repos.UserRepo;
@@ -8,7 +7,6 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +46,11 @@ class UserServiceTest {
 
         Mockito.verify(userRepo, Mockito.times(1)).save(user);
         Mockito.verify(mailSender, Mockito.times(1))
-            .send(
-                ArgumentMatchers.eq(user.getEmail()),
-                ArgumentMatchers.eq("Activation code"),
-                ArgumentMatchers.contains("Welcome to the Twitter")
-            );
+                .send(
+                        ArgumentMatchers.eq(user.getEmail()),
+                        ArgumentMatchers.eq("Activation code"),
+                        ArgumentMatchers.contains("Welcome to the Twitter")
+                );
     }
 
     @Test

@@ -4,7 +4,7 @@
             <label class="col-sm-2 col-form-label">User Name:</label>
             <div class="col-sm-6">
                 <input type="text" class="form-control ${(usernameError??)?string('is-invalid', '')}"
-                       value="<#if user??>${user.username}</#if>" name="username" placeholder="Username" />
+                       value="<#if user??>${user.username}</#if>" name="username" placeholder="Username"/>
                 <#if usernameError??>
                     <div class="invalid-feedback">
                         ${usernameError}
@@ -16,7 +16,7 @@
             <label class="col-sm-2 col-form-label">Password:</label>
             <div class="col-sm-6">
                 <input type="password" class="form-control ${(passwordError??)?string('is-invalid', '')}"
-                       name="password" placeholder="Password" />
+                       name="password" placeholder="Password"/>
                 <#if passwordError??>
                     <div class="invalid-feedback">
                         ${passwordError}
@@ -28,8 +28,9 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Password:</label>
                 <div class="col-sm-6">
-                    <input type="password" class="form-control ${(passwordConfirmationError??)?string('is-invalid', '')}"
-                          name="passwordConfirmation" placeholder="Retype password" />
+                    <input type="password"
+                           class="form-control ${(passwordConfirmationError??)?string('is-invalid', '')}"
+                           name="passwordConfirmation" placeholder="Retype password"/>
                     <#if passwordConfirmationError??>
                         <div class="invalid-feedback">
                             ${passwordConfirmationError}
@@ -41,7 +42,7 @@
                 <label class="col-sm-2 col-form-label">Email:</label>
                 <div class="col-sm-6">
                     <input type="email" class="form-control ${(emailError??)?string('is-invalid', '')}"
-                           value="<#if user??>${user.email}</#if>" name="email" placeholder="mail@example.com" />
+                           value="<#if user??>${user.email}</#if>" name="email" placeholder="mail@example.com"/>
                     <#if emailError??>
                         <div class="invalid-feedback">
                             ${emailError}
@@ -59,7 +60,7 @@
                 </#if>
             </div>
         </#if>
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <#if !isRegisterForm>
             <a href="/registration">Add new user</a>
         </#if>
@@ -69,7 +70,7 @@
 
 <#macro logout>
     <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button class="btn btn-primary" type="submit"><#if user??>Sign Out<#else>Log In</#if></button>
     </form>
 </#macro>

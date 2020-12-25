@@ -32,7 +32,7 @@ public class LoginTest {
     @Test
     public void contextLoads() throws Exception {
         mockMvc.perform(get("/"))
-                 .andDo(print())
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Hello, guest")))
                 .andExpect(content().string(containsString("Please, login")));

@@ -43,7 +43,7 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void messageListTest() throws  Exception {
+    public void messageListTest() throws Exception {
         mockMvc.perform(get("/main"))
                 .andDo(print())
                 .andExpect(authenticated())
@@ -52,7 +52,7 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void filterMessageTest() throws  Exception {
+    public void filterMessageTest() throws Exception {
         mockMvc.perform(get("/main").param("filter", "tag"))
                 .andDo(print())
                 .andExpect(authenticated())
@@ -62,7 +62,7 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void addMessageToListTest() throws  Exception {
+    public void addMessageToListTest() throws Exception {
         MockHttpServletRequestBuilder multipart = multipart("/main")
                 .file("file", "testContent".getBytes())
                 .param("text", "Message text")

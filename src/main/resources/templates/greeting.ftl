@@ -1,5 +1,5 @@
 <#import "parts/common.ftl" as c>
 <@c.page>
-<h5>Hello, guest!</h5>
-<div>This is a my local Twitter.</div>
+    <h5>Hello, guest!</h5>
+    <div>This is a my local Twitter.</div>
 </@c.page>

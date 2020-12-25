@@ -19,17 +19,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message =  "Username cannot be empty")
+    @NotBlank(message = "Username cannot be empty")
     @Length(max = 2048, message = "Message too long (more than 2kB)")
     private String username;
 
-    @NotBlank(message =  "Password cannot be empty")
+    @NotBlank(message = "Password cannot be empty")
     private String password;
 
     private boolean active;
 
     @Email(message = "Email is not correct")
-    @NotBlank(message =  "Email cannot be empty")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
 
     private String activationCode;
@@ -44,17 +44,17 @@ public class User implements UserDetails {
 
     @ManyToMany
     @JoinTable(
-        name = "user_subscriptions",
-        joinColumns =  { @JoinColumn(name = "channel_id") },
-        inverseJoinColumns = { @JoinColumn(name = "subscriber_id") }
+            name = "user_subscriptions",
+            joinColumns = {@JoinColumn(name = "channel_id")},
+            inverseJoinColumns = {@JoinColumn(name = "subscriber_id")}
     )
     private Set<User> subscribers = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
             name = "user_subscriptions",
-            joinColumns =  { @JoinColumn(name = "subscriber_id") },
-            inverseJoinColumns = { @JoinColumn(name = "channel_id") }
+            joinColumns = {@JoinColumn(name = "subscriber_id")},
+            inverseJoinColumns = {@JoinColumn(name = "channel_id")}
     )
     private Set<User> subscriptions = new HashSet<>();
 
