@@ -1,5 +1,17 @@
 services:
-  postgres:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - twitter_net
+
+  db:
     image: postgres:12
     ports:
       - 5432:5432
@@ -9,6 +21,16 @@ services:
       POSTGRES_DB: twitter
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+    healthcheck:
+      test: psql -U postgres twitter
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    networks:
+      - twitter_net
 
 volumes:
   postgres_data:
+
+networks:
+  twitter_net:
