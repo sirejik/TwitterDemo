@@ -28,6 +28,7 @@ services:
       retries: 30
     networks:
       - twitter_net
+    restart: always
 
 volumes:
   postgres_data:
