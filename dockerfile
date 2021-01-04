@@ -1,6 +1,5 @@
-FROM openjdk:8
+FROM maven:3-openjdk-15
 
-RUN apt-get update && apt-get install -y maven
 COPY . /project
 RUN  cd /project && mvn package -Dmaven.test.skip=true
 
