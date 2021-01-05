@@ -1,6 +1,10 @@
 FROM maven:3-openjdk-15
 
-COPY . /project
-RUN  cd /project && mvn package -Dmaven.test.skip=true
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:resolve
 
-ENTRYPOINT java -jar /project/target/Twitter-1.0-SNAPSHOT.jar
+COPY src ./src
+RUN mvn package -Dmaven.test.skip=true
+
+ENTRYPOINT java -jar /app/target/Twitter-1.0-SNAPSHOT.jar
