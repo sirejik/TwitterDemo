@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Value("${hostname}")
+    @Value("${application.hostname}")
     private String hostname;
 
     @Override
@@ -121,7 +121,7 @@ public class UserService implements UserDetailsService {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello, %s!\n" +
-                            "Welcome to the Twitter. Please, visit next link: http://%s/activate/%s ",
+                            "Welcome to the Twitter. Please, visit next link: http://%s/activate/%s",
                     user.getUsername(),
                     hostname,
                     user.getActivationCode()
