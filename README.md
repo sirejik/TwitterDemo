@@ -27,7 +27,7 @@ docker-compose up -d
 ## Run only postgres databases
 To run only postgres databases need to execute the following command:
 ```
-docker-compose -f docker-compose-dev.yml up
+docker-compose -f docker-compose-dev.yml up -d
 ```
 
 ## How to execute the SQL query manually.
