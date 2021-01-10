@@ -4,6 +4,11 @@
     <form action="${path}" method="post">
         <div class="col-sm-6 offset-sm-3">
             <div class="card">
+                <#if isRegisterForm>
+                    <div class="card-header">
+                        <span>Register new user</span>
+                    </div>
+                </#if>
                 <div class="m-2">
                     <div class="row">
                         <label class="col-sm-3 col-form-label">Login</label>
@@ -55,7 +60,7 @@
                                 </#if>
                             </div>
                         </div>
-                        <div class="mt-2">
+                        <div class="row mt-2 mx-0">
                             <div class="g-recaptcha" data-sitekey="6LeOpwMaAAAAAFONvcj5JU5Gixi0wGfcgya_8ak8"></div>
                             <#if captchaError??>
                                 <div class="alert alert-danger" role="alert">
@@ -65,7 +70,7 @@
                         </div>
                     </#if>
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                    <div class="row mt-2 justify-content-center">
+                    <div class="row mt-2 mx-0 justify-content-center">
                         <button class="btn btn-primary col-sm-3" type="submit"><#if isRegisterForm>Create<#else>Sign In</#if></button>
                     </div>
                 </div>
