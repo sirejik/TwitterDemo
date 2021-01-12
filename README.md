@@ -6,6 +6,13 @@ functionality:
 - Like and unlike posts.
 - Subscribe to users.
 
+# Technology stack
+- Spring Boot
+- Hibernate
+- Freemarker
+- PostgreSQL
+- Docker
+
 # How to run the application
 There are two ways to run an application:
 - Completely in Docker. In this case, two containers must be running: with the application and with the database.
