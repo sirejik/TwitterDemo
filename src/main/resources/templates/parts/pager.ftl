@@ -15,6 +15,7 @@
     <#else>
         <#assign body = 1..page.getTotalPages()>
     </#if>
+    <#if page.getTotalPages() gt 1>
     <div class="container mt-3">
         <div class="row">
             <ul class="pagination col justify-content-center">
@@ -56,4 +57,5 @@
             </ul>
         </div>
     </div>
+    </#if>
 </#macro>
