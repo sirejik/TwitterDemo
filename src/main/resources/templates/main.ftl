@@ -1,4 +1,5 @@
 <#import "parts/common.ftl" as c>
+<#import "parts/messageEdit.ftl" as m>
 
 <@c.page>
     <div class="form-row">
@@ -11,7 +12,7 @@
         </div>
     </div>
 
-    <#include "parts/messageEdit.ftl" />
+    <@m.messageEdit true />
 
     <#include "parts/messageList.ftl" />
 
