@@ -117,6 +117,21 @@ public class MessageController {
         return "userMessages";
     }
 
+    @GetMapping("/subscriptions/{author}")
+    public String userSubscriptions(
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable User author,
+            Model model
+    ) {
+        model.addAttribute("userChannel", author);
+        model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
+        model.addAttribute("subscribersCount", author.getSubscribers().size());
+        model.addAttribute("isSubscriber", author.getSubscribers().contains(currentUser));
+        model.addAttribute("isCurrentUser", currentUser.equals(author));
+
+        return "subscriptions";
+    }
+
     @PostMapping("/user-messages/{user}")
     public String updateMessage(
             @AuthenticationPrincipal User currentUser,

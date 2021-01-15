@@ -99,7 +99,7 @@ public class UserController {
         } else {
             model.addAttribute("users", user.getSubscribers());
         }
-        return "subscriptions";
+        return "subscriptionList";
     }
 
 }
