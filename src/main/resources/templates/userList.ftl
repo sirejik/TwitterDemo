@@ -1,14 +1,13 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    List of users
-    <table>
+    <table class="table table-striped table-bordered">
         <thead>
-        <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col"></th>
+            </tr>
         </thead>
         <tbody>
         <#list users as user>
