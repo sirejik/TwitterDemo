@@ -30,7 +30,7 @@
     </head>
     <body>
     <#include "navbar.ftl">
-    <div class="container mt-6">
+    <div class="container mt-5">
         <#nested>
     </div>
     <script src="https://www.google.com/recaptcha/api.js"></script>
