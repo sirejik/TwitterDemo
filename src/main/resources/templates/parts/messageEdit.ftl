@@ -1,9 +1,9 @@
 <#macro messageEdit mainPage>
     <#if mainPage>
-        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-           aria-controls="collapseExample">Add new message</a>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseMessageEdit" role="button"
+            aria-expanded="false" aria-controls="collapseMessageEdit">Add new message</a>
     </#if>
-    <div class="collapse <#if message??>show</#if>" id="collapseExample">
+    <div class="collapse <#if message??>show</#if>" id="collapseMessageEdit">
         <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
@@ -32,10 +32,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary"><#if mainPage>Send message<#else>Save message</#if></button>
+                    <button class="btn btn-primary" type="submit" data-toggle="collapse"
+                        data-target="#collapseMessageEdit" aria-expanded="false" aria-controls="collapseMessageEdit">
+                        <#if mainPage>Send message<#else>Save message</#if>
+                    </button>
                     <#if !mainPage>
-                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                               aria-controls="collapseExample">Cancel</a>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseMessageEdit" role="button"
+                            aria-expanded="false" aria-controls="collapseMessageEdit">Cancel</a>
                     </#if>
                 </div>
                 <input type="hidden" value="${_csrf.token}" name="_csrf"/>
